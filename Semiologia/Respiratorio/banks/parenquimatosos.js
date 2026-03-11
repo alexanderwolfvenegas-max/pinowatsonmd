@@ -1,6 +1,7 @@
 export const BANK_PARENQUIMATOSOS = [
   {
     id: "Síndrome de condensación",
+    unit: "parenquimatosos",
     img: "images/Fig. 42-2-1.png",
     alt: "Imágenes de síndrome de condensación",
     prompt: "Identifica el signo radiográfico característico del síndrome de condensación pulmonar.",
@@ -10,6 +11,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Neumonía Atípica",
+    unit: "parenquimatosos",
     img: "images/Fig. 42-2-2.png",
     alt: "Neumonía atípica",
     prompt: "Identifica el signo radiográfico característico de la neumonía atípica.",
@@ -19,6 +21,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Neumonía Atípica Severa",
+    unit: "parenquimatosos",
     img: "images/Fig. 42-2-3.png",
     alt: "Neumonía atípica severa",
     prompt: "Identifica el signo radiográfico característico de la neumonía atípica.",
@@ -28,6 +31,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Atelectasia",
+    unit: "parenquimatosos",
     img: "images/Fig. 42-2-4.png",
     alt: "Atelectasia pasiva",
     prompt: "¿Qué tipo de atelectasia es?",
@@ -37,6 +41,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Tumores Pulmonares",
+    unit: "parenquimatosos",
     img: "images/Fig. 42-2-5.png",
     alt: "Metástasis pulmonares",
     prompt: "¿Qué patrón radiológico identifica y con qué tipo de cáncer se asocia?",
@@ -46,6 +51,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "SDRA COVID-19",
+    unit: "parenquimatosos",
     case: "Douglas, de 30 años y obeso, es de nacionalidad venezolana y vive en la Argentina desde hace 3 años con su esposa y tres hijos en un departamento de dos ambientes. Tiene estudios universitarios completos (periodista), pero trabaja como taxista. Comenzó su enfermedad actual el 15 de marzo de 2020 con un síndrome febril con hipertermia de 39 °C y tos seca. A las 48 horas agregó mialgias intensas y a los 5 días del inicio de los síntomas dificultad respiratoria, por lo que consultó en un servicio de urgencias. En el examen físico se encontraba febril, taquicárdico, taquipneico y con una saturación del 84% en la oximetría de pulso. Se auscultaban crepitantes bibasales aislados. La radiografía de tórax mostró infiltrados pulmonares bilaterales de los vértices a las bases. Se solicitaron gases en sangre arterial respirando aire ambiente: pH 7,48; PCO2 27 mmHg; PO2 54 mmHg; HCO3 24 mEq/L; saturación de O2 85%.",
     questions: [
       {
@@ -64,6 +70,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Atelectasia masiva por tapón mucoso",
+    unit: "parenquimatosos",
     case: "Vitalis, de 50 años, se encuentra internado en la sala de clínica médica por una neumonía aspirativa. Al cuarto día de internación presenta dificultad respiratoria. En el examen físico se constata FC 130 lat/min, TA 110/80 mmHg, FR 36/min, temperatura axilar 37 °C y SaO2 76% con fracción inspirada de oxígeno del 24%. El examen del aparato respiratorio revela utilización de los músculos accesorios y, en el hemitórax derecho, menor expansión y ausencia del murmullo vesicular. En dicha región, las vibraciones vocales están abolidas y la percusión es mate con columna sonora.",
     questions: [
       {
@@ -103,6 +110,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Semiología comparativa de síndromes respiratorios",
+    unit: "parenquimatosos",
     type: "matching",
     prompt: "Arrastre cada hallazgo al síndrome respiratorio correspondiente.",
     matchItems: [
@@ -130,6 +138,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Etapas evolutivas",
+    unit: "parenquimatosos",
     imgs: [
       "images/Vidrio Esmerilado.png",
       "images/Panal de Abejas.png"
@@ -147,6 +156,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Definición de síndrome de condensación",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la definición de síndrome de condensación?",
     options: [
       "Compromiso del espacio aéreo por ocupación alveolar",
@@ -159,6 +169,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Definición de neumonía",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la definición de neumonía?",
     options: [
       "Inflamación del parénquima pulmonar (exudado alveolar) debida a la llegada de un microorganismo",
@@ -171,6 +182,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Expresión clínica de neumonía",
+    unit: "parenquimatosos",
     prompt: "¿Cómo se expresa la manifestación clínica de la neumonía?",
     options: [
       "Fiebre y tos, con expectoración o no, asociadas a un infiltrado nuevo en la radiografía de tórax o en la tomografía computarizada",
@@ -183,6 +195,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Manifestaciones clínicas de neumonía típica",
+    unit: "parenquimatosos",
     prompt: "¿Cómo se expresan las manifestaciones clínicas de la neumonía típica?",
     options: [
       "Fiebre, dolor torácico de tipo puntada de costado y tos con expectoración herrumbrosa",
@@ -195,6 +208,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Fascies neumónica",
+    unit: "parenquimatosos",
     prompt: "¿Qué es la fascies neumónica?",
     options: [
       "En la neumonía neumocócica, en ocasiones se presenta eritema malar y herpes labial",
@@ -207,6 +221,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Manifestaciones clínicas de neumonía atípica",
+    unit: "parenquimatosos",
     prompt: "¿Cómo se expresan las manifestaciones clínicas de las neumonías atípicas?",
     options: [
       "Es común la presencia de disnea y tos seca, fiebre escasa, cefalea, vómitos, diarrea, mialgias y deterioro del estado general",
@@ -219,6 +234,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Etiología de neumonía atípica",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la etiología de la neumonía atípica?",
     options: [
       "Mycoplasma pneumoniae, Coxiella burnetii, Legionella pneumophila, Chlamydophila psittaci, Chlamydophila pneumoniae y virus como influenza y sarampión",
@@ -231,6 +247,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Complicación de neumonía atípica",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es una complicación de la neumonía atípica?",
     options: [
       "Síndrome de distrés respiratorio agudo (SDRA)",
@@ -243,6 +260,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Neumonía intrahospitalaria criterio",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es el criterio de neumonía intrahospitalaria?",
     options: [
       "Neumonía que aparece 48 horas o más después de la internación y que no estaba presente ni en incubación al ingreso",
@@ -255,6 +273,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Etiología de neumonía intrahospitalaria",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la etiología más frecuente de la neumonía intrahospitalaria?",
     options: [
       "Bacilos gramnegativos y Staphylococcus aureus",
@@ -267,6 +286,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Definición de atelectasia",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la definición de atelectasia?",
     options: [
       "Disminución del volumen pulmonar total o parcial por pérdida del aire",
@@ -279,6 +299,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Clasificación de atelectasia",
+    unit: "parenquimatosos",
     prompt: "¿Cómo se clasifica la atelectasia?",
     options: [
       "Obstructiva, pasiva, cicatrizal y adhesiva",
@@ -291,6 +312,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Atelectasia obstructiva",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la definición de atelectasia obstructiva?",
     options: [
       "Obstrucción extrínseca o intrínseca de la vía respiratoria",
@@ -303,6 +325,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Atelectasia pasiva",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la definición de atelectasia pasiva?",
     options: [
       "Compresión del espacio aéreo que se encuentra en contacto con la pleura",
@@ -315,6 +338,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Atelectasia cicatrizal",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la definición de atelectasia cicatrizal?",
     options: [
       "Cicatrices en los bronquios como secuela tuberculosa o fibrosis pulmonar",
@@ -327,6 +351,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Atelectasia adhesiva",
+    unit: "parenquimatosos",
     prompt: "¿Cuál es la definición de atelectasia adhesiva?",
     options: [
       "Disminución del surfactante pulmonar o sustancia tensoactiva",
@@ -339,6 +364,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Retracción radiográfica en atelectasia",
+    unit: "parenquimatosos",
     prompt: "¿Cuál de las siguientes corresponde a signos radiográficos de retracción por atelectasia según el grado de volumen pulmonar afectado?",
     options: [
       "Disminución del volumen del hemitórax afectado, elevación diafragmática del lado afectado, desplazamiento homolateral del mediastino y de las cisuras, hiperinsuflación compensadora y retracción costal",
@@ -351,6 +377,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Complicaciones clínicas de atelectasia",
+    unit: "parenquimatosos",
     prompt: "¿Cuáles son las complicaciones clínicas de la atelectasia?",
     options: [
       "Hipoxemia e incluso insuficiencia respiratoria y neumonía",
@@ -363,6 +390,7 @@ export const BANK_PARENQUIMATOSOS = [
   },
   {
     id: "Situaciones clínicas que alertan atelectasia",
+    unit: "parenquimatosos",
     prompt: "¿Qué situaciones clínicas frecuentes deben alertar sobre la presencia de atelectasia?",
     options: [
       "Dificultad respiratoria aguda en el posoperatorio, neumonía que se repite en una misma localización pulmonar en un paciente tabaquista, y crisis asmática que no mejora o empeora a pesar del tratamiento",
