@@ -101,33 +101,68 @@ export const BANK_PARENQUIMATOSOS = [
       }
     ]
   },
-  {
-    id: "Semiología comparativa de síndromes respiratorios",
-    type: "matching",
-    prompt: "Arrastre cada hallazgo al síndrome respiratorio correspondiente.",
-    matchItems: [
-      { id: "m1", text: "Patrón restrictivo: taquipnea con hipopnea", syndrome: "neumonia", slot: "inspeccion" },
-      { id: "m2", text: "Patrón restrictivo: taquipnea con hipopnea", syndrome: "atelectasia", slot: "inspeccion" },
-      { id: "m3", text: "Patrón restrictivo: taquipnea con hipopnea", syndrome: "derrame", slot: "inspeccion" },
+{
+  id: "Semiología comparativa de síndromes respiratorios",
+  type: "matching",
+  prompt: "Arrastre cada hallazgo al síndrome respiratorio correspondiente.",
+  matchBoard: [
+    {
+      syndrome: "neumonia",
+      title: "Condensación con luz bronquial permeable (neumonía)",
+      rows: [
+        { slot: "inspeccion", label: "Inspección", subLabel: "Patrón ventilatorio" },
+        { slot: "palpacion", label: "Palpación", subLabel: "Vibraciones vocales" },
+        { slot: "percusion_pulmonar", label: "Percusión", subLabel: "Pulmonar" },
+        { slot: "percusion_columna", label: "Percusión", subLabel: "De la columna" },
+        { slot: "auscultacion", label: "Auscultación" }
+      ]
+    },
+    {
+      syndrome: "atelectasia",
+      title: "Condensación con luz bronquial obstruida (atelectasia por obstrucción)",
+      rows: [
+        { slot: "inspeccion", label: "Inspección", subLabel: "Patrón ventilatorio" },
+        { slot: "palpacion", label: "Palpación", subLabel: "Vibraciones vocales" },
+        { slot: "percusion_pulmonar", label: "Percusión", subLabel: "Pulmonar" },
+        { slot: "percusion_columna", label: "Percusión", subLabel: "De la columna" },
+        { slot: "auscultacion", label: "Auscultación" }
+      ]
+    },
+    {
+      syndrome: "derrame",
+      title: "Derrame pleural",
+      rows: [
+        { slot: "inspeccion", label: "Inspección", subLabel: "Patrón ventilatorio" },
+        { slot: "palpacion", label: "Palpación", subLabel: "Vibraciones vocales" },
+        { slot: "percusion_pulmonar", label: "Percusión", subLabel: "Pulmonar" },
+        { slot: "percusion_columna", label: "Percusión", subLabel: "De la columna" },
+        { slot: "auscultacion", label: "Auscultación" }
+      ]
+    }
+  ],
+  matchItems: [
+    { id: "m1", text: "Patrón restrictivo: taquipnea con hipopnea", syndrome: "neumonia", slot: "inspeccion" },
+    { id: "m2", text: "Patrón restrictivo: taquipnea con hipopnea", syndrome: "atelectasia", slot: "inspeccion" },
+    { id: "m3", text: "Patrón restrictivo: taquipnea con hipopnea", syndrome: "derrame", slot: "inspeccion" },
 
-      { id: "m4", text: "Aumentadas", syndrome: "neumonia", slot: "palpacion" },
-      { id: "m5", text: "Abolidas", syndrome: "atelectasia", slot: "palpacion" },
-      { id: "m6", text: "Disminuidas o abolidas", syndrome: "derrame", slot: "palpacion" },
+    { id: "m4", text: "Aumentadas", syndrome: "neumonia", slot: "palpacion" },
+    { id: "m5", text: "Abolidas", syndrome: "atelectasia", slot: "palpacion" },
+    { id: "m6", text: "Disminuidas o abolidas", syndrome: "derrame", slot: "palpacion" },
 
-      { id: "m7", text: "Mate", syndrome: "neumonia", slot: "percusion_pulmonar" },
-      { id: "m8", text: "Mate", syndrome: "atelectasia", slot: "percusion_pulmonar" },
-      { id: "m9", text: "Mate", syndrome: "derrame", slot: "percusion_pulmonar" },
+    { id: "m7", text: "Mate", syndrome: "neumonia", slot: "percusion_pulmonar" },
+    { id: "m8", text: "Mate", syndrome: "atelectasia", slot: "percusion_pulmonar" },
+    { id: "m9", text: "Mate", syndrome: "derrame", slot: "percusion_pulmonar" },
 
-      { id: "m10", text: "Sonora", syndrome: "neumonia", slot: "percusion_columna" },
-      { id: "m11", text: "Sonora", syndrome: "atelectasia", slot: "percusion_columna" },
-      { id: "m12", text: "Mate", syndrome: "derrame", slot: "percusion_columna" },
+    { id: "m10", text: "Sonora", syndrome: "neumonia", slot: "percusion_columna" },
+    { id: "m11", text: "Sonora", syndrome: "atelectasia", slot: "percusion_columna" },
+    { id: "m12", text: "Mate", syndrome: "derrame", slot: "percusion_columna" },
 
-      { id: "m13", text: "Estertores crepitantes y soplo tubario o brónquico según la etapa", syndrome: "neumonia", slot: "auscultacion" },
-      { id: "m14", text: "Silencio respiratorio", syndrome: "atelectasia", slot: "auscultacion" },
-      { id: "m15", text: "Abolición del murmullo vesicular / Soplo en “E” en el límite superior del derrame", syndrome: "derrame", slot: "auscultacion" }
-    ],
-    why: "La condensación con bronquio permeable aumenta las vibraciones vocales y puede dar soplo tubario; la atelectasia obstructiva abole vibraciones vocales y murmullo vesicular; el derrame pleural disminuye o abole vibraciones vocales y muestra matidez pulmonar y también en la columna."
-  },
+    { id: "m13", text: "Estertores crepitantes y soplo tubario o brónquico según la etapa", syndrome: "neumonia", slot: "auscultacion" },
+    { id: "m14", text: "Silencio respiratorio", syndrome: "atelectasia", slot: "auscultacion" },
+    { id: "m15", text: "Abolición del murmullo vesicular / Soplo en “E” en el límite superior del derrame", syndrome: "derrame", slot: "auscultacion" }
+  ],
+  why: "La condensación con bronquio permeable aumenta las vibraciones vocales y puede dar soplo tubario; la atelectasia obstructiva abole vibraciones vocales y murmullo vesicular; el derrame pleural disminuye o abole vibraciones vocales y muestra matidez pulmonar y también en la columna."
+},
   {
     id: "Etapas evolutivas",
     imgs: [

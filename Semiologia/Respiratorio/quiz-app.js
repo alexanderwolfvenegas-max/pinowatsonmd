@@ -9,6 +9,23 @@ let secondsLeft = 0;
 let draggedId = null;
 let missedQuestions = [];
 
+const syndromeLabels = {
+  bronquitico: "Síndrome bronquítico",
+  condensacion: "Síndrome de condensación con bronquio permeable",
+  atelectasico: "Síndrome atelectásico",
+  derrame_pleural: "Síndrome de derrame pleural",
+  neumotorax: "Síndrome del neumotórax"
+};
+
+const slotLabels = {
+  dato_clinico: "Dato clínico",
+  ventilacion: "Ventilación",
+  tos: "Tos",
+  vibraciones_vocales: "Vibraciones vocales",
+  percusion: "Percusión",
+  auscultacion: "Auscultación"
+};
+
 const elImgWrap = document.getElementById("imgWrap");
 const elImgs = document.getElementById("qImgs");
 const elOpen = document.getElementById("openImg");
@@ -35,6 +52,7 @@ const elMatchQuestionWrap = document.getElementById("matchQuestionWrap");
 const checkMatchBtn = document.getElementById("checkMatchBtn");
 const resetMatchBtn = document.getElementById("resetMatchBtn");
 const matchBank = document.getElementById("matchBank");
+const matchGrid = document.getElementById("matchGrid");
 
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
@@ -105,6 +123,7 @@ function normalizeEntry(entry) {
       caseText: entry.case || "",
       prompt: entry.prompt,
       matchItems: entry.matchItems ? entry.matchItems.slice() : [],
+      matchBoard: entry.matchBoard ? JSON.parse(JSON.stringify(entry.matchBoard)) : [],
       why: entry.why || ""
     }];
   }
@@ -143,7 +162,46 @@ function normalizeEntry(entry) {
     why: entry.why
   }];
 }
+function renderMatchBoard(q) {
+  matchGrid.innerHTML = "";
 
+  if (!q || q.type !== "matching" || !Array.isArray(q.matchBoard)) return;
+
+  q.matchBoard.forEach(card => {
+    const cardEl = document.createElement("div");
+    cardEl.className = "syndromeCard";
+
+    const titleEl = document.createElement("div");
+    titleEl.className = "syndromeTitle";
+    titleEl.textContent = card.title;
+    cardEl.appendChild(titleEl);
+
+    card.rows.forEach(row => {
+      const rowEl = document.createElement("div");
+      rowEl.className = "dropRow";
+
+      const labelEl = document.createElement("div");
+      labelEl.className = "dropLabel";
+
+      if (row.subLabel) {
+        labelEl.innerHTML = escapeHtml(row.label) + "<br><span>" + escapeHtml(row.subLabel) + "</span>";
+      } else {
+        labelEl.textContent = row.label;
+      }
+
+      const zoneEl = document.createElement("div");
+      zoneEl.className = "dropZone";
+      zoneEl.dataset.syndrome = card.syndrome;
+      zoneEl.dataset.slot = row.slot;
+
+      rowEl.appendChild(labelEl);
+      rowEl.appendChild(zoneEl);
+      cardEl.appendChild(rowEl);
+    });
+
+    matchGrid.appendChild(cardEl);
+  });
+}
 function buildQuiz(sourceBank = BANK, shuffleGroups = true) {
   const groups = shuffleGroups ? shuffle(sourceBank) : sourceBank.slice();
   return groups.flatMap(normalizeEntry);
@@ -393,31 +451,44 @@ function checkMatchQuestion(q) {
   clearQuestionTimer();
 
   let correctCount = 0;
-  const total = q.matchItems.length;
 
   getDropZones().forEach(zone => {
     zone.classList.remove("correct", "wrong");
 
-    const chip = zone.querySelector(".draggableItem");
-    if (!chip) return;
+    const expectedIds = q.matchItems
+      .filter(item =>
+        item.syndrome === zone.dataset.syndrome &&
+        item.slot === zone.dataset.slot
+      )
+      .map(item => item.id)
+      .sort();
 
-    const expectedItem = q.matchItems.find(x =>
-      x.syndrome === zone.dataset.syndrome &&
-      x.slot === zone.dataset.slot
-    );
+    if (expectedIds.length === 0) {
+      zone.classList.remove("filled", "correct", "wrong");
+      return;
+    }
 
-    const ok = expectedItem &&
-      normalizeMatchText(chip.textContent) === normalizeMatchText(expectedItem.text);
+    const actualIds = Array.from(zone.querySelectorAll(".draggableItem"))
+      .map(item => item.dataset.id)
+      .sort();
+
+    const ok =
+      actualIds.length === expectedIds.length &&
+      actualIds.every((id, i) => id === expectedIds[i]);
 
     if (ok) {
       zone.classList.add("correct");
-      correctCount += 1;
+      correctCount += actualIds.length;
     } else {
       zone.classList.add("wrong");
     }
+
+    zone.classList.toggle("filled", actualIds.length > 0);
   });
 
-  const allCorrect = correctCount === total;
+  const allCorrect =
+    correctCount === q.matchItems.length &&
+    matchBank.querySelectorAll(".draggableItem").length === 0;
 
   if (allCorrect) {
     score += 1;
@@ -430,47 +501,54 @@ function checkMatchQuestion(q) {
     }
     streak = 0;
     elFeedback.className = "feedback no";
-    elFeedback.innerHTML = "<b>Resultado:</b> " + correctCount + " de " + total + " correctas.<div class='explain'>" + escapeHtml(q.why) + "</div>";
+    elFeedback.innerHTML =
+      "<b>Resultado:</b> " +
+      correctCount +
+      " de " +
+      q.matchItems.length +
+      " correctas.<div class='explain'>" +
+      escapeHtml(q.why) +
+      "</div>";
   }
 
   elFeedback.style.display = "block";
   elScore.textContent = String(score);
   elStreak.textContent = String(streak);
 }
-
 function attachMatchDropEvents() {
-  getDropZones().forEach(zone => {
-    zone.addEventListener("dragover", e => {
+  matchGrid.addEventListener("dragover", e => {
+    const zone = e.target.closest(".dropZone");
+    if (zone) {
       e.preventDefault();
-    });
+    }
+  });
 
-    zone.addEventListener("drop", e => {
-      e.preventDefault();
+  matchGrid.addEventListener("drop", e => {
+    const zone = e.target.closest(".dropZone");
+    if (!zone) return;
 
-      const idFromTransfer = e.dataTransfer?.getData("text/plain");
-      const activeId = idFromTransfer || draggedId;
-      if (!activeId) return;
+    e.preventDefault();
 
-      const draggedEl = document.querySelector(`.draggableItem[data-id="${activeId}"]`);
-      if (!draggedEl) return;
+    const idFromTransfer = e.dataTransfer?.getData("text/plain");
+    const activeId = idFromTransfer || draggedId;
+    if (!activeId) return;
 
-      const oldParent = draggedEl.parentElement;
-      const existing = zone.querySelector(".draggableItem");
+    const draggedEl = document.querySelector(`.draggableItem[data-id="${activeId}"]`);
+    if (!draggedEl) return;
 
-      if (existing && existing !== draggedEl) {
-        matchBank.appendChild(existing);
-      }
+    const oldParent = draggedEl.parentElement;
 
-      zone.appendChild(draggedEl);
-      zone.classList.add("filled");
-      zone.classList.remove("correct", "wrong");
+    zone.appendChild(draggedEl);
+    zone.classList.add("filled");
+    zone.classList.remove("correct", "wrong");
 
-      if (oldParent && oldParent.classList.contains("dropZone") && oldParent !== zone) {
-        if (!oldParent.querySelector(".draggableItem")) {
-          oldParent.classList.remove("filled", "correct", "wrong");
-        }
-      }
-    });
+    if (oldParent && oldParent.classList.contains("dropZone") && oldParent !== zone) {
+      oldParent.classList.toggle(
+        "filled",
+        oldParent.querySelectorAll(".draggableItem").length > 0
+      );
+      oldParent.classList.remove("correct", "wrong");
+    }
   });
 
   matchBank.addEventListener("dragover", e => {
@@ -491,7 +569,11 @@ function attachMatchDropEvents() {
     matchBank.appendChild(draggedEl);
 
     if (oldParent && oldParent.classList.contains("dropZone")) {
-      oldParent.classList.remove("filled", "correct", "wrong");
+      oldParent.classList.toggle(
+        "filled",
+        oldParent.querySelectorAll(".draggableItem").length > 0
+      );
+      oldParent.classList.remove("correct", "wrong");
     }
   });
 }
@@ -566,15 +648,17 @@ function render() {
   elFeedback.innerHTML = "";
 
   if (q.type === "matching") {
-    quizRow.classList.add("matchingMode");
-    quizRow.classList.remove("textOnlyMode");
+  quizRow.classList.add("matchingMode");
+  quizRow.classList.remove("textOnlyMode");
 
-    questionHintControls.style.display = "none";
-    elChoices.style.display = "none";
-    elChoices.innerHTML = "";
-    elMatchQuestionWrap.style.display = "block";
-    resetMatchQuestion(q);
-  } else {
+  questionHintControls.style.display = "none";
+  elChoices.style.display = "none";
+  elChoices.innerHTML = "";
+  elMatchQuestionWrap.style.display = "block";
+
+  renderMatchBoard(q);
+  resetMatchQuestion(q);
+} else {
     quizRow.classList.remove("matchingMode");
 
     if (isTextOnly) {
