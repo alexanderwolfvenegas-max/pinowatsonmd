@@ -1,0 +1,1 @@
+export const BANK_ENDOCARDITIS_INFECCIOSA = [];

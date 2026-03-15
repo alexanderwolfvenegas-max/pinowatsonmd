@@ -1,0 +1,1 @@
+export const BANK_CARDIOPATIAS_CONGENITAS_ADULTO = [];

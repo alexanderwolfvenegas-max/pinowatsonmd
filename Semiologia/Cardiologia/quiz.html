@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Semiología Respiratoria — Quiz</title>
+  <link rel="stylesheet" href="./quiz.css" />
+</head>
+<body>
+  <header class="siteHeader">
+    <div class="siteHeaderInner">
+      <div>
+        <h1>Semiología Respiratoria — Quiz</h1>
+        <p>Elija la opción correcta.</p>
+      </div>
+      <a href="index.html" class="btn secondary headerBack">← Respiratorio</a>
+    </div>
+  </header>
+
+  <main class="pageWrap">
+    <div class="quizTopbar quizTopbarAdaptive">
+      <div class="quizStat">
+        <span class="quizStatLabel">Pregunta</span>
+        <span class="quizStatValue"><span id="qNum"></span>/<span id="qTotal"></span></span>
+      </div>
+
+      <div class="quizStat" id="timerStat" style="display:none;">
+        <span class="quizStatLabel">Tiempo</span>
+        <span class="quizStatValue" id="timerValue">01:00</span>
+      </div>
+
+      <div class="quizStat" style="display:none;">
+        <span class="quizStatLabel">Correctas</span>
+        <span class="quizStatValue" id="score"></span>
+      </div>
+
+      <div class="quizStat" style="display:none;">
+        <span class="quizStatLabel">Racha</span>
+        <span class="quizStatValue" id="streak"></span>
+      </div>
+    </div>
+
+    <section id="resultsScreen" class="resultsScreen" style="display:none;">
+      <h2>Resultado final</h2>
+      <p id="finalScoreText"></p>
+      <div class="controls centerControls">
+        <button class="btn" id="retryMissedBtn" type="button">Rehacer incorrectas</button>
+        <button class="btn secondary" id="restartQuizBtn" type="button">Reiniciar quiz</button>
+        <a href="index.html" class="btn secondary" style="text-decoration:none;">← Respiratorio</a>
+      </div>
+    </section>
+
+    <div class="card" id="quizCard">
+      <div class="row" id="quizRow">
+        <div id="leftPane">
+          <div id="imgWrap" class="imgWrap">
+            <div id="qImgs"></div>
+
+            <div class="meta">
+              <div class="pill" id="partPill" style="display:none;">
+                <b>Caso:</b><span id="partNum"></span>/<span id="partTotal"></span>
+              </div>
+            </div>
+          </div>
+
+          <div id="imgTip" class="small">
+            Si la imagen no carga, ábrala en una pestaña nueva:
+            <a id="openImg" target="_blank" rel="noopener">Abrir imagen</a>
+          </div>
+
+          <div id="caseWrap" class="caseWrap" style="display:none; margin-top: 12px;">
+            <div class="caseLabel">Caso clínico</div>
+            <div id="caseText" class="caseText"></div>
+          </div>
+        </div>
+
+        <div id="rightPane">
+          <p class="qTitle" id="qPrompt"></p>
+
+          <div id="questionHintControls" class="controls" style="display:none; margin-top:0; margin-bottom:12px;">
+            <button class="btn secondary" id="questionHintBtn" type="button">Pista</button>
+          </div>
+
+          <div id="questionHintWrap" class="semiologyWrap" style="display:none;">
+            <table class="semiologyTable">
+              <tr>
+                <th colspan="4" class="semiologyTitle">
+                  CUADRO 42-2-1. Diferencias semiológicas de los tres grandes síndromes respiratorios
+                </th>
+              </tr>
+              <tr>
+                <th class="semiologyBlank"></th>
+                <th class="semiologyColHead">Condensación con luz bronquial permeable (neumonía)</th>
+                <th class="semiologyColHead">Condensación con luz bronquial obstruida (atelectasia por obstrucción)</th>
+                <th class="semiologyColHead">Derrame pleural</th>
+              </tr>
+              <tr>
+                <td class="semiologySection">
+                  Inspección
+                  <span class="semiologySubrow">Patrón ventilatorio</span>
+                </td>
+                <td class="semiologyCell">Patrón restrictivo: taquipnea con hipopnea</td>
+                <td class="semiologyCell">Patrón restrictivo: taquipnea con hipopnea</td>
+                <td class="semiologyCell">Patrón restrictivo: taquipnea con hipopnea</td>
+              </tr>
+              <tr>
+                <td class="semiologySection">
+                  Palpación
+                  <span class="semiologySubrow">Vibraciones vocales</span>
+                </td>
+                <td class="semiologyCell">Aumentadas</td>
+                <td class="semiologyCell">Abolidas</td>
+                <td class="semiologyCell">Disminuidas o abolidas</td>
+              </tr>
+              <tr>
+                <td class="semiologySection">
+                  Percusión
+                  <span class="semiologySubrow">Pulmonar</span>
+                  <span class="semiologySubrow">De la columna</span>
+                </td>
+                <td class="semiologyCell">Mate<br>Sonora</td>
+                <td class="semiologyCell">Mate<br>Sonora</td>
+                <td class="semiologyCell">Mate<br>Mate</td>
+              </tr>
+              <tr>
+                <td class="semiologySection">Auscultación</td>
+                <td class="semiologyCell">Estertores crepitantes y soplo tubario o brónquico según la etapa</td>
+                <td class="semiologyCell">Silencio respiratorio</td>
+                <td class="semiologyCell">Abolición del murmullo vesicular<br>Soplo en “E” en el límite superior del derrame</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="choices" id="choices"></div>
+
+          <div id="matchQuestionWrap" style="display:none;">
+            <div class="controls" style="margin-top:0; margin-bottom:12px;">
+              <button class="btn secondary" id="checkMatchBtn" type="button">Verificar correlación</button>
+              <button class="btn secondary" id="resetMatchBtn" type="button">Reiniciar correlación</button>
+            </div>
+
+            <div class="matchBankWrap">
+              <div class="caseLabel">Hallazgos para arrastrar</div>
+              <div id="matchBank" class="matchBank"></div>
+            </div>
+
+            <div id="matchGrid" class="matchGrid"></div>
+          </div>
+
+          <div id="feedback" class="feedback" style="display:none;"></div>
+
+          <div class="controls">
+            <button class="btn secondary" id="prevBtn">◀ Anterior</button>
+            <button class="btn" id="nextBtn">Siguiente ▶</button>
+            <button class="btn secondary" id="shuffleBtn">Mezclar quiz</button>
+            <button class="btn secondary" id="resetBtn">Reiniciar puntaje</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="./quiz-app.js"></script>
+</body>
+</html>

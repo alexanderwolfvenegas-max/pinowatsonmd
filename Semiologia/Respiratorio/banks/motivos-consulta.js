@@ -1,1 +1,3 @@
-export const BANK_MOTIVOS_CONSULTA = [];
+export const BANK_MOTIVOS_CONSULTA = [
+    
+];
